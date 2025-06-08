@@ -1,0 +1,1 @@
+public enum MoveMode { idel, sneak, walk, run }
