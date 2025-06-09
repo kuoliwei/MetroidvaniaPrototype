@@ -78,7 +78,8 @@ public class PlayerController : MonoBehaviour
     }
     private void OnApplyJump(InputAction.CallbackContext ctx)
     {
-            jumpHandler.SetJumpForce(player.CharacterData.jumpForce);
-            jumpHandler.ApplyJump();
+        jumpHandler.SetJumpForce(player.CharacterData.jumpForce);
+        jumpHandler.SetMaxJumpTime(2);
+        jumpHandler.ApplyJump();
     }
 }
