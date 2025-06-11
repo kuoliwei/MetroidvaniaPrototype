@@ -9,6 +9,7 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
     int maxJumpTime;
     private int currentJumpCount = 0;
     float jumpforce;
+    float fastFallForce;
     JumpMode jumpMode;
     Rigidbody2D rb2D;
     CapsuleCollider2D cc2D;
@@ -27,9 +28,16 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
         rb2D = GetComponent<Rigidbody2D>();
         cc2D = GetComponent<CapsuleCollider2D>();
     }
+    void IJumpHandler.ApplyFastFall()
+    {
+        // 僅允許在空中觸發
+        if (!isGrounded)
+        {
+            rb2D.velocity = new Vector2(rb2D.velocity.x, -Mathf.Abs(fastFallForce)); // 或其他固定值
+        }
+    }
     void IJumpHandler.ApplyJump()
     {
-
         if (currentJumpCount < maxJumpTime && currentJumpCount > 0)
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
@@ -52,6 +60,10 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
         this.jumpMode = jumpMode;
     }
 
+    void IJumpHandler.SetFastFallForce(float fastFallForce)
+    {
+        this.fastFallForce = fastFallForce;
+    }
     void IJumpHandler.SetJumpForce(float jumpForce)
     {
         this.jumpforce = jumpForce;

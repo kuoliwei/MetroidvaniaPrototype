@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.U2D.Animation;
 using UnityEngine;
 using UnityEngine.InputSystem; // 新增：使用 Input System
 public class PlayerController : MonoBehaviour
@@ -15,6 +14,7 @@ public class PlayerController : MonoBehaviour
         inputActions = new();
         inputActions.Player.ChangeDirectionAndSpeed.performed += OnChangeDirectionAndSpeed;
         inputActions.Player.ApplyJump.performed += OnApplyJump;
+        inputActions.Player.FastFall.performed += OnFastFall;
         inputActions.Enable();
     }
 
@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     {
         inputActions.Player.ChangeDirectionAndSpeed.performed -= OnChangeDirectionAndSpeed;
         inputActions.Player.ApplyJump.performed -= OnApplyJump;
+        inputActions.Player.FastFall.performed -= OnFastFall;
         inputActions.Disable();
     }
     // Start is called before the first frame update
@@ -79,7 +80,12 @@ public class PlayerController : MonoBehaviour
     private void OnApplyJump(InputAction.CallbackContext ctx)
     {
         jumpHandler.SetJumpForce(player.CharacterData.jumpForce);
-        jumpHandler.SetMaxJumpTime(2);
+        jumpHandler.SetMaxJumpTime(player.CharacterData.maxJumpTime);
         jumpHandler.ApplyJump();
+    }
+    private void OnFastFall(InputAction.CallbackContext ctx)
+    {
+        jumpHandler.SetFastFallForce(player.CharacterData.fastFallForce);
+        jumpHandler.ApplyFastFall();
     }
 }

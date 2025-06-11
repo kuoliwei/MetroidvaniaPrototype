@@ -5,4 +5,6 @@ public class CharacterData : ScriptableObject
     public float walkSpeed;
     public float runSpeed;
     public float jumpForce;
+    public int maxJumpTime;
+    public float fastFallForce;
 }

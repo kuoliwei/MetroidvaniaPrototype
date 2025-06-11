@@ -62,6 +62,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FastFall"",
+                    ""type"": ""Button"",
+                    ""id"": ""aaf8eb42-7dd4-4058-ac1c-d127a8e44a15"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -141,6 +150,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ApplyJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""134f20ef-840e-4104-ac91-4fa52f949b89"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastFall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -153,6 +173,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_ChangeDirectionAndSpeed = m_Player.FindAction("ChangeDirectionAndSpeed", throwIfNotFound: true);
         m_Player_SetRunSpeen = m_Player.FindAction("SetRunSpeen", throwIfNotFound: true);
         m_Player_ApplyJump = m_Player.FindAction("ApplyJump", throwIfNotFound: true);
+        m_Player_FastFall = m_Player.FindAction("FastFall", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -223,6 +244,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_ChangeDirectionAndSpeed;
     private readonly InputAction m_Player_SetRunSpeen;
     private readonly InputAction m_Player_ApplyJump;
+    private readonly InputAction m_Player_FastFall;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -231,6 +253,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @ChangeDirectionAndSpeed => m_Wrapper.m_Player_ChangeDirectionAndSpeed;
         public InputAction @SetRunSpeen => m_Wrapper.m_Player_SetRunSpeen;
         public InputAction @ApplyJump => m_Wrapper.m_Player_ApplyJump;
+        public InputAction @FastFall => m_Wrapper.m_Player_FastFall;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -252,6 +275,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ApplyJump.started += instance.OnApplyJump;
             @ApplyJump.performed += instance.OnApplyJump;
             @ApplyJump.canceled += instance.OnApplyJump;
+            @FastFall.started += instance.OnFastFall;
+            @FastFall.performed += instance.OnFastFall;
+            @FastFall.canceled += instance.OnFastFall;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -268,6 +294,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ApplyJump.started -= instance.OnApplyJump;
             @ApplyJump.performed -= instance.OnApplyJump;
             @ApplyJump.canceled -= instance.OnApplyJump;
+            @FastFall.started -= instance.OnFastFall;
+            @FastFall.performed -= instance.OnFastFall;
+            @FastFall.canceled -= instance.OnFastFall;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -291,5 +320,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnChangeDirectionAndSpeed(InputAction.CallbackContext context);
         void OnSetRunSpeen(InputAction.CallbackContext context);
         void OnApplyJump(InputAction.CallbackContext context);
+        void OnFastFall(InputAction.CallbackContext context);
     }
 }

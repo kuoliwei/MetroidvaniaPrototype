@@ -24,6 +24,8 @@ public class Player : MonoBehaviour, ICharacter
     }
     void init()
     {
-        GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
+        Rigidbody2D rb2D = GetComponent<Rigidbody2D>();
+        rb2D.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb2D.gravityScale = 2;
     }
 }
