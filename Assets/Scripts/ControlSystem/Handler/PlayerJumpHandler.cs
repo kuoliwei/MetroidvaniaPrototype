@@ -48,7 +48,7 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
         {
             rb2D.velocity = new Vector2(rb2D.velocity.x, jumpforce);
             currentJumpCount++;
-            Debug.Log(currentJumpCount);
+            //Debug.Log(currentJumpCount);
         }
     }
     void IJumpHandler.SetMaxJumpTime(int maxJumpTime)
@@ -71,7 +71,7 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
     bool IJumpHandler.IsGrounded() => isGrounded;
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground") && !isGrounded)
+        if (collision.gameObject.tag == "Ground" && !isGrounded)
         {
             Bounds bounds = cc2D.bounds;
             float footY = bounds.min.y + 0.05f; // 稍微高於腳底一點的容錯範圍
@@ -80,10 +80,10 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
                 // 接觸點是否在角色下方（可加一點偏移）
                 if (contact.point.y <= footY)
                 {
-                    Debug.Log("touch ground");
+                    //Debug.Log("touch ground");
                     isGrounded = true;
                     currentJumpCount = 0;
-                    Debug.Log(currentJumpCount);
+                    //Debug.Log(currentJumpCount);
                     return;
                 }
             }
@@ -93,9 +93,9 @@ public class PlayerJumpHandler : MonoBehaviour, IJumpHandler
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Ground"))
+        if (collision.gameObject.tag == "Ground")
         {
-            Debug.Log("leave ground at OnCollisionExit");
+            //Debug.Log("leave ground at OnCollisionExit");
             isGrounded = false;
         }
     }

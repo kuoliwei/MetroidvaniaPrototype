@@ -8,21 +8,26 @@ public class PlayerController : MonoBehaviour
     ICharacter player;
     IMovementHandler movementHandler;
     IJumpHandler jumpHandler;
+    IClimbHandler climbHandler;
     PlayerInputActions inputActions;
     private void OnEnable()
     {
         inputActions = new();
-        inputActions.Player.ChangeDirectionAndSpeed.performed += OnChangeDirectionAndSpeed;
-        inputActions.Player.ApplyJump.performed += OnApplyJump;
-        inputActions.Player.FastFall.performed += OnFastFall;
+        inputActions.Player.ApplyMovement.started += OnChangeDirection;
+        inputActions.Player.ApplyJump.started += OnApplyJump;
+        inputActions.Player.FastFall.started += OnFastFall;
+        inputActions.Player.ApplyClimb.started += OnEnterClimb;
+        inputActions.Player.ApplyClimb.canceled += OnStopClimb;
         inputActions.Enable();
     }
 
     private void OnDisable()
     {
-        inputActions.Player.ChangeDirectionAndSpeed.performed -= OnChangeDirectionAndSpeed;
-        inputActions.Player.ApplyJump.performed -= OnApplyJump;
-        inputActions.Player.FastFall.performed -= OnFastFall;
+        inputActions.Player.ApplyMovement.started -= OnChangeDirection;
+        inputActions.Player.ApplyJump.started -= OnApplyJump;
+        inputActions.Player.FastFall.started -= OnFastFall;
+        inputActions.Player.ApplyClimb.started -= OnEnterClimb;
+        inputActions.Player.ApplyClimb.canceled -= OnStopClimb;
         inputActions.Disable();
     }
     // Start is called before the first frame update
@@ -34,7 +39,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (inputActions.Player.ApplyMovement.ReadValue<float>() > 0f)
+        if (inputActions.Player.ApplyMovement.ReadValue<float>() != 0f)
         {
             movementHandler.ApplyMovement();
         }
@@ -46,6 +51,14 @@ public class PlayerController : MonoBehaviour
         {
             movementHandler.SetMoveSpeed(player.CharacterData.walkSpeed);
         }
+        if (inputActions.Player.ApplyClimb.ReadValue<Vector2>() != new Vector2(0, 0))
+        {
+            if (climbHandler.IsClimbable())
+            {
+                climbHandler.SetClimbDirection(inputActions.Player.ApplyClimb.ReadValue<Vector2>());
+                climbHandler.ApplyClimb();
+            }
+        }
     }
     void init()
     {
@@ -54,27 +67,28 @@ public class PlayerController : MonoBehaviour
     }
     void GetPlayer()
     {
-        this.player = GetComponent<Player>();
+        player = GetComponent<Player>();
     }
     void GetHandlers()
     {
-        this.movementHandler = GetComponent<PlayerMovementHandler>();
-        this.jumpHandler = GetComponent<PlayerJumpHandler>();
+        movementHandler = GetComponent<PlayerMovementHandler>();
+        jumpHandler = GetComponent<PlayerJumpHandler>();
+        climbHandler = GetComponent<PlayerClimbHandler>();
         if (movementHandler == null)
             Debug.LogError("缺少 PlayerMovementHandler 元件");
-
         if (jumpHandler == null)
             Debug.LogError("缺少 PlayerJumpHandler 元件");
+        if (climbHandler == null)
+            Debug.LogError("缺少 PlayerClimbHandler 元件");
     }
-    private void OnChangeDirectionAndSpeed(InputAction.CallbackContext ctx)
+    private void OnChangeDirection(InputAction.CallbackContext ctx)
     {
         float dirValue = ctx.ReadValue<float>();
 
         if (dirValue != 0)
         {
-            MoveDirection direction = dirValue < 0 ? MoveDirection.left : MoveDirection.right;
-            movementHandler.ChangeDirection(direction);
-            Debug.Log($"方向：{direction},{dirValue}, 已設定速度");
+            movementHandler.ChangeDirection(dirValue);
+            //Debug.Log($"方向：{dirValue}, 已設定速度");
         }
     }
     private void OnApplyJump(InputAction.CallbackContext ctx)
@@ -87,5 +101,20 @@ public class PlayerController : MonoBehaviour
     {
         jumpHandler.SetFastFallForce(player.CharacterData.fastFallForce);
         jumpHandler.ApplyFastFall();
+    }
+    private void OnEnterClimb(InputAction.CallbackContext ctx)
+    {
+        if (climbHandler.IsClimbable())
+        {
+            climbHandler.EnterClimb();
+            climbHandler.SetClimbSpeed(player.CharacterData.climbSpeed);
+        }
+    }
+    private void OnStopClimb(InputAction.CallbackContext ctx)
+    {
+        if (climbHandler.IsClimbing())
+        {
+            climbHandler.StopClimb();
+        }
     }
 }

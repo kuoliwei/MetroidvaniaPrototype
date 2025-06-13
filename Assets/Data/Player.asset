@@ -15,5 +15,6 @@ MonoBehaviour:
   walkSpeed: 4
   runSpeed: 8
   jumpForce: 15
+  climbSpeed: 2.5
   maxJumpTime: 1
   fastFallForce: 5

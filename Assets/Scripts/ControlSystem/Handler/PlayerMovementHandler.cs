@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
 {
     float moveSpeed;
-    MoveDirection moveDirection;
+    float moveDirection;
     MoveMode moveMode;
     Rigidbody2D rb2D;
     // Start is called before the first frame update
@@ -25,14 +25,15 @@ public class PlayerMovementHandler : MonoBehaviour, IMovementHandler
     }
     void IMovementHandler.ApplyMovement()
     {
-        rb2D.velocity = new Vector2((int)moveDirection * moveSpeed, rb2D.velocity.y);
+        //Debug.Log($"當前行進方向{moveDirection}");
+        rb2D.velocity = new Vector2(moveDirection * moveSpeed, rb2D.velocity.y);
     }
 
-    void IMovementHandler.ChangeDirection(MoveDirection moveDirection)
+    void IMovementHandler.ChangeDirection(float moveDirection)
     {
         this.moveDirection = moveDirection;
         Vector3 scale = transform.localScale;
-        scale.x = Mathf.Abs(scale.x) * (int)moveDirection;
+        scale.x = Mathf.Abs(scale.x) * moveDirection;
         transform.localScale = scale;
     }
 

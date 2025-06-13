@@ -29,18 +29,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""ApplyMovement"",
-                    ""type"": ""Button"",
+                    ""type"": ""Value"",
                     ""id"": ""4614d3e5-e8b2-4db8-b97b-f7d470ede9c5"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
-                    ""name"": ""ChangeDirectionAndSpeed"",
-                    ""type"": ""Button"",
-                    ""id"": ""77f3e0a6-d5ff-4f20-933c-895fd8359382"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -71,63 +62,50 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ApplyClimb"",
+                    ""type"": ""Value"",
+                    ""id"": ""766223b1-b351-4f43-8c9c-79575ceee8b8"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": ""1D Axis"",
-                    ""id"": ""6bd9a41b-7f05-4301-85fe-edabbb9507c6"",
+                    ""id"": ""eef9165a-e727-4fc0-a169-295d12f4fe8c"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeDirectionAndSpeed"",
+                    ""action"": ""ApplyMovement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": ""negative"",
-                    ""id"": ""e358e6f4-08f3-4c8f-aea2-2a0f189945df"",
+                    ""id"": ""72cb458d-10bc-4a3f-930c-2e0e14611659"",
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeDirectionAndSpeed"",
+                    ""action"": ""ApplyMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""positive"",
-                    ""id"": ""c7895e22-fae1-4e8b-ac16-9e2d83461f34"",
+                    ""id"": ""0aa4eb60-4efb-4f4d-a0e0-adb93413d56e"",
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeDirectionAndSpeed"",
+                    ""action"": ""ApplyMovement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ac76bf16-1f39-4e8c-88af-9088ad5703cf"",
-                    ""path"": ""<Keyboard>/a"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ApplyMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""612934fd-54cf-4aff-a170-b515000260dd"",
-                    ""path"": ""<Keyboard>/d"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""ApplyMovement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
@@ -161,6 +139,61 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""FastFall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""6f00ce00-bd60-40e1-87ca-aa0aac15a777"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ApplyClimb"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""e3b01e45-e30d-4a7a-8f4f-4822ba314e8b"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ApplyClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""316dc587-0008-4372-854b-657cda8143a1"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ApplyClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7c005c87-147d-4757-93db-5a97d55183dd"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ApplyClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""0c96f45a-45db-4452-b43a-fc8da9a6d6ae"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ApplyClimb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -170,10 +203,10 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_ApplyMovement = m_Player.FindAction("ApplyMovement", throwIfNotFound: true);
-        m_Player_ChangeDirectionAndSpeed = m_Player.FindAction("ChangeDirectionAndSpeed", throwIfNotFound: true);
         m_Player_SetRunSpeen = m_Player.FindAction("SetRunSpeen", throwIfNotFound: true);
         m_Player_ApplyJump = m_Player.FindAction("ApplyJump", throwIfNotFound: true);
         m_Player_FastFall = m_Player.FindAction("FastFall", throwIfNotFound: true);
+        m_Player_ApplyClimb = m_Player.FindAction("ApplyClimb", throwIfNotFound: true);
     }
 
     ~@PlayerInputActions()
@@ -241,19 +274,19 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_ApplyMovement;
-    private readonly InputAction m_Player_ChangeDirectionAndSpeed;
     private readonly InputAction m_Player_SetRunSpeen;
     private readonly InputAction m_Player_ApplyJump;
     private readonly InputAction m_Player_FastFall;
+    private readonly InputAction m_Player_ApplyClimb;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @ApplyMovement => m_Wrapper.m_Player_ApplyMovement;
-        public InputAction @ChangeDirectionAndSpeed => m_Wrapper.m_Player_ChangeDirectionAndSpeed;
         public InputAction @SetRunSpeen => m_Wrapper.m_Player_SetRunSpeen;
         public InputAction @ApplyJump => m_Wrapper.m_Player_ApplyJump;
         public InputAction @FastFall => m_Wrapper.m_Player_FastFall;
+        public InputAction @ApplyClimb => m_Wrapper.m_Player_ApplyClimb;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -266,9 +299,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ApplyMovement.started += instance.OnApplyMovement;
             @ApplyMovement.performed += instance.OnApplyMovement;
             @ApplyMovement.canceled += instance.OnApplyMovement;
-            @ChangeDirectionAndSpeed.started += instance.OnChangeDirectionAndSpeed;
-            @ChangeDirectionAndSpeed.performed += instance.OnChangeDirectionAndSpeed;
-            @ChangeDirectionAndSpeed.canceled += instance.OnChangeDirectionAndSpeed;
             @SetRunSpeen.started += instance.OnSetRunSpeen;
             @SetRunSpeen.performed += instance.OnSetRunSpeen;
             @SetRunSpeen.canceled += instance.OnSetRunSpeen;
@@ -278,6 +308,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FastFall.started += instance.OnFastFall;
             @FastFall.performed += instance.OnFastFall;
             @FastFall.canceled += instance.OnFastFall;
+            @ApplyClimb.started += instance.OnApplyClimb;
+            @ApplyClimb.performed += instance.OnApplyClimb;
+            @ApplyClimb.canceled += instance.OnApplyClimb;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -285,9 +318,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ApplyMovement.started -= instance.OnApplyMovement;
             @ApplyMovement.performed -= instance.OnApplyMovement;
             @ApplyMovement.canceled -= instance.OnApplyMovement;
-            @ChangeDirectionAndSpeed.started -= instance.OnChangeDirectionAndSpeed;
-            @ChangeDirectionAndSpeed.performed -= instance.OnChangeDirectionAndSpeed;
-            @ChangeDirectionAndSpeed.canceled -= instance.OnChangeDirectionAndSpeed;
             @SetRunSpeen.started -= instance.OnSetRunSpeen;
             @SetRunSpeen.performed -= instance.OnSetRunSpeen;
             @SetRunSpeen.canceled -= instance.OnSetRunSpeen;
@@ -297,6 +327,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @FastFall.started -= instance.OnFastFall;
             @FastFall.performed -= instance.OnFastFall;
             @FastFall.canceled -= instance.OnFastFall;
+            @ApplyClimb.started -= instance.OnApplyClimb;
+            @ApplyClimb.performed -= instance.OnApplyClimb;
+            @ApplyClimb.canceled -= instance.OnApplyClimb;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -317,9 +350,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnApplyMovement(InputAction.CallbackContext context);
-        void OnChangeDirectionAndSpeed(InputAction.CallbackContext context);
         void OnSetRunSpeen(InputAction.CallbackContext context);
         void OnApplyJump(InputAction.CallbackContext context);
         void OnFastFall(InputAction.CallbackContext context);
+        void OnApplyClimb(InputAction.CallbackContext context);
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerController))]
 [RequireComponent(typeof(PlayerMovementHandler))]
 [RequireComponent(typeof(PlayerJumpHandler))]
+[RequireComponent(typeof(PlayerClimbHandler))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(CapsuleCollider2D))]
 public class Player : MonoBehaviour, ICharacter
